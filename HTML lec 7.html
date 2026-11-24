@@ -1,0 +1,1356 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Faculty Consultation Log | LPU</title>
+
+
+<style>
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eaf3ff;
+    color: #26364a;
+    line-height: 1.6;
+}
+
+
+header {
+    background: linear-gradient(120deg, #173454, #eb650c);
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header img {
+    width: 110px;
+    height: 85px;
+    object-fit: contain;
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-top: 10px;
+}
+
+header p {
+    margin-top: 5px;
+}
+
+
+main {
+    width: 90%;
+    max-width: 1250px;
+    margin: 30px auto;
+}
+
+
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 10px;
+    text-align: center;
+    border-bottom: 4px solid #eb650c;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.stat-card h3 {
+    color: #234a78;
+    font-size: 15px;
+}
+
+.stat-card p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #eb650c;
+}
+
+
+
+section {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+h2 {
+    color: #234a78;
+    margin-bottom: 20px;
+    border-left: 5px solid #eb650c;
+    padding-left: 12px;
+}
+
+
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd8e5;
+    border-radius: 6px;
+    font-size: 15px;
+    background: #f8fbff;
+    font-family: Arial, sans-serif;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #eb650c;
+    box-shadow: 0 0 4px rgba(235,101,12,0.4);
+}
+
+
+
+button {
+    padding: 11px 18px;
+    background: #eb650c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #173454;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.reset-btn {
+    background: #64748b;
+}
+
+#message {
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+
+
+.info-section {
+    background: #f0f7ff;
+    border-left: 5px solid #234a78;
+}
+
+
+
+.search-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    flex: 2;
+}
+
+.search-bar select {
+    flex: 1;
+}
+
+
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+th {
+    background: #234a78;
+    color: white;
+    padding: 13px;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background: #f0f7ff;
+}
+
+
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.Pending {
+    background: #fff0c2;
+    color: #8a5a00;
+}
+
+.In-Progress {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.Completed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+
+
+.edit-btn {
+    background: #2563eb;
+    margin: 3px;
+}
+
+.delete-btn {
+    background: #dc2626;
+    margin: 3px;
+}
+
+#emptyMessage {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+}
+
+
+.campus-images {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.campus-images img {
+    width: calc(50% - 10px);
+    height: 240px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+
+
+footer {
+    background: #173454;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    margin-top: 30px;
+}
+
+
+
+@media (max-width: 768px) {
+
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .campus-images img {
+        width: 100%;
+    }
+
+    main {
+        width: 95%;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+
+<header>
+
+    <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxAoHtAKi2wkyGZwvN8i3LCl14RpZHTd7kjqUT-Qug6iXRtZwUqjfGx6FK&s=10"
+    alt="LPU Logo">
+
+    <h1>Faculty Consultation Log</h1>
+
+    <p>Student Consultation and Follow-up System</p>
+
+</header>
+
+<main>
+
+
+<div class="dashboard">
+
+    <div class="stat-card">
+        <h3>Total Consultations</h3>
+        <p id="totalCount">0</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Pending</h3>
+        <p id="pendingCount">0</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>In Progress</h3>
+        <p id="progressCount">0</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Completed</h3>
+        <p id="completedCount">0</p>
+    </div>
+
+</div>
+
+
+
+
+<section>
+
+    <h2 id="formHeading">New Consultation Entry</h2>
+
+    <form id="consultationForm">
+
+        <div class="form-grid">
+
+            <div>
+                <label for="student">Student Name *</label>
+
+                <input
+                type="text"
+                id="student"
+                placeholder="Enter student name"
+                required>
+            </div>
+
+
+            <div>
+                <label for="course">Course Reference *</label>
+
+                <input
+                type="text"
+                id="course"
+                placeholder="Enter course name or code"
+                required>
+            </div>
+
+
+            <div>
+                <label for="date">Consultation Date *</label>
+
+                <input
+                type="date"
+                id="date"
+                required>
+            </div>
+
+
+            <div>
+                <label for="category">Consultation Category *</label>
+
+                <select id="category" required>
+
+                    <option value="">Select Category</option>
+
+                    <option value="Academic">Academic</option>
+
+                    <option value="Career Guidance">
+                        Career Guidance
+                    </option>
+
+                    <option value="General Support">
+                        General Support
+                    </option>
+
+                    <option value="Other">Other</option>
+
+                </select>
+            </div>
+
+
+            <div class="full-width">
+
+                <label for="notes">Consultation Notes *</label>
+
+                <textarea
+                id="notes"
+                rows="4"
+                placeholder="Write consultation notes..."
+                required></textarea>
+
+            </div>
+
+
+            <div class="full-width">
+
+                <label for="action">Action Items</label>
+
+                <textarea
+                id="action"
+                rows="3"
+                placeholder="Write tasks to complete..."></textarea>
+
+            </div>
+
+
+            <div>
+
+                <label for="followup">Follow-up Date</label>
+
+                <input
+                type="date"
+                id="followup">
+
+            </div>
+
+
+            <div>
+
+                <label for="status">Status</label>
+
+                <select id="status">
+
+                    <option value="Pending">Pending</option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Completed">Completed</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="button-group">
+
+            <button type="submit" id="saveButton">
+                Save Consultation
+            </button>
+
+            <button type="reset" class="reset-btn" id="resetButton">
+                Clear Form
+            </button>
+
+        </div>
+
+        <p id="message" role="status" aria-live="polite"></p>
+
+    </form>
+
+</section>
+
+
+
+
+<section class="info-section">
+
+    <h2>Privacy and Access Control</h2>
+
+    <p>
+        Consultation records should only be available to
+        authorized faculty members. Avoid storing sensitive
+        student information in this demonstration website.
+    </p>
+
+</section>
+
+
+
+
+<section>
+
+    <h2>Consultation History</h2>
+
+    <div class="search-bar">
+
+        <input
+        type="search"
+        id="searchInput"
+        placeholder="Search by student name or course...">
+
+        <select id="filterStatus">
+
+            <option value="All">All Status</option>
+
+            <option value="Pending">Pending</option>
+
+            <option value="In Progress">In Progress</option>
+
+            <option value="Completed">Completed</option>
+
+        </select>
+
+        <button type="button" id="exportButton">
+            Export CSV
+        </button>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Student</th>
+
+                    <th>Course</th>
+
+                    <th>Date</th>
+
+                    <th>Category</th>
+
+                    <th>Follow-up</th>
+
+                    <th>Status</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="consultationTable">
+
+               
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <p id="emptyMessage">
+        No consultation records found.
+    </p>
+
+</section>
+
+
+
+
+<section>
+
+    <h2>Lovely Professional University</h2>
+
+    <div class="campus-images">
+
+        <img
+        src="https://media.collegedekho.com/media/img/institute/crawled_images/None/HERGSRRETGERT.jpg"
+        alt="LPU Campus">
+
+        <img
+        src="https://www.collegebatch.com/blog/wp-content/uploads/2025/09/Lovely-Professional-University-Notable-Alumni.webp"
+        alt="LPU Information">
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<footer>
+
+    <p>Faculty Consultation Log</p>
+
+    <p>Lovely Professional University</p>
+
+    <p>Student Consultation and Follow-up System</p>
+
+</footer>
+
+
+
+
+<script>
+
+
+const form = document.getElementById("consultationForm");
+
+const table = document.getElementById("consultationTable");
+
+const student = document.getElementById("student");
+
+const course = document.getElementById("course");
+
+const date = document.getElementById("date");
+
+const category = document.getElementById("category");
+
+const notes = document.getElementById("notes");
+
+const action = document.getElementById("action");
+
+const followup = document.getElementById("followup");
+
+const status = document.getElementById("status");
+
+const searchInput = document.getElementById("searchInput");
+
+const filterStatus = document.getElementById("filterStatus");
+
+const message = document.getElementById("message");
+
+const saveButton = document.getElementById("saveButton");
+
+const formHeading = document.getElementById("formHeading");
+
+
+
+let consultations = [];
+
+try {
+
+    const savedData = localStorage.getItem("consultations");
+
+    const parsedData = savedData ? JSON.parse(savedData) : [];
+
+    consultations = Array.isArray(parsedData) ? parsedData : [];
+
+} catch (error) {
+
+    consultations = [];
+
+    console.error("Could not load saved records:", error);
+
+}
+
+
+
+
+let editId = null;
+
+
+
+function saveToStorage() {
+
+    try {
+
+        localStorage.setItem(
+            "consultations",
+            JSON.stringify(consultations)
+        );
+
+        return true;
+
+    } catch (error) {
+
+        showMessage("Unable to save records in browser storage.", "error");
+
+        return false;
+
+    }
+
+}
+
+
+
+
+function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className = type;
+
+}
+
+
+
+function resetForm() {
+
+    form.reset();
+
+    editId = null;
+
+    saveButton.textContent = "Save Consultation";
+
+    formHeading.textContent = "New Consultation Entry";
+
+}
+
+
+
+form.addEventListener("submit", function(event) {
+
+
+
+    event.preventDefault();
+
+
+    
+
+    const studentName = student.value.trim();
+
+    const courseName = course.value.trim();
+
+
+    
+
+    if (
+        !studentName ||
+        !courseName ||
+        !date.value ||
+        !category.value ||
+        !notes.value.trim()
+    ) {
+
+        showMessage(
+            "Please fill all required fields.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    
+
+    if (followup.value && followup.value < date.value) {
+
+        showMessage(
+            "Follow-up date cannot be before consultation date.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    
+
+    const consultation = {
+
+        id: editId ?? (
+            window.crypto?.randomUUID?.() ??
+            Date.now().toString()
+        ),
+
+        student: studentName,
+
+        course: courseName,
+
+        date: date.value,
+
+        category: category.value,
+
+        notes: notes.value.trim(),
+
+        action: action.value.trim(),
+
+        followup: followup.value,
+
+        status: status.value
+
+    };
+
+
+    
+
+    if (editId !== null) {
+
+        consultations = consultations.map(item =>
+            item.id === editId ? consultation : item
+        );
+
+        showMessage(
+            "Consultation updated successfully!",
+            "success"
+        );
+
+    }
+
+    else {
+
+        consultations.push(consultation);
+
+        showMessage(
+            "Consultation saved successfully!",
+            "success"
+        );
+
+    }
+
+
+    // Save data
+
+    if (!saveToStorage()) {
+        return;
+    }
+
+
+    // Update website
+
+    displayConsultations();
+
+    updateDashboard();
+
+    resetForm();
+
+});
+
+
+
+
+function displayConsultations() {
+
+    table.replaceChildren();
+
+
+    const searchText = searchInput.value.toLowerCase();
+
+    const selectedStatus = filterStatus.value;
+
+
+
+    const filteredRecords = consultations.filter(item => {
+
+        const matchesSearch =
+
+            item.student.toLowerCase().includes(searchText) ||
+
+            item.course.toLowerCase().includes(searchText);
+
+
+        const matchesStatus =
+
+            selectedStatus === "All" ||
+
+            item.status === selectedStatus;
+
+
+        return matchesSearch && matchesStatus;
+
+    });
+
+
+    
+
+    filteredRecords.forEach(item => {
+
+        const row = document.createElement("tr");
+
+
+        
+
+        function addCell(value) {
+
+            const cell = document.createElement("td");
+
+            cell.textContent = value || "-";
+
+            row.appendChild(cell);
+
+        }
+
+
+        addCell(item.student);
+
+        addCell(item.course);
+
+        addCell(item.date);
+
+        addCell(item.category);
+
+        addCell(item.followup);
+
+
+        
+
+        const statusCell = document.createElement("td");
+
+        const statusBadge = document.createElement("span");
+
+        statusBadge.className =
+            "status " + item.status.replace(" ", "-");
+
+        statusBadge.textContent = item.status;
+
+        statusCell.appendChild(statusBadge);
+
+        row.appendChild(statusCell);
+
+
+    
+
+        const actionCell = document.createElement("td");
+
+
+        
+
+        const editButton = document.createElement("button");
+
+        editButton.textContent = "Edit";
+
+        editButton.className = "edit-btn";
+
+        editButton.addEventListener("click", function() {
+
+            editConsultation(item.id);
+
+        });
+
+
+
+        const deleteButton = document.createElement("button");
+
+        deleteButton.textContent = "Delete";
+
+        deleteButton.className = "delete-btn";
+
+        deleteButton.addEventListener("click", function() {
+
+            deleteConsultation(item.id);
+
+        });
+
+
+        actionCell.appendChild(editButton);
+
+        actionCell.appendChild(deleteButton);
+
+        row.appendChild(actionCell);
+
+
+        table.appendChild(row);
+
+    });
+
+
+    
+
+    document.getElementById("emptyMessage").style.display =
+
+        filteredRecords.length === 0 ? "block" : "none";
+
+}
+
+
+
+function editConsultation(id) {
+
+    const item = consultations.find(
+        record => record.id === id
+    );
+
+    if (!item) return;
+
+
+
+    student.value = item.student;
+
+    course.value = item.course;
+
+    date.value = item.date;
+
+    category.value = item.category;
+
+    notes.value = item.notes;
+
+    action.value = item.action;
+
+    followup.value = item.followup;
+
+    status.value = item.status;
+
+
+
+    editId = id;
+
+
+
+    saveButton.textContent = "Update Consultation";
+
+    formHeading.textContent = "Edit Consultation Entry";
+
+
+    showMessage(
+        "You are editing a consultation record.",
+        "success"
+    );
+
+
+    
+
+    form.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "start"
+
+    });
+
+}
+
+
+
+function deleteConsultation(id) {
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this consultation?"
+    );
+
+    if (!confirmDelete) return;
+
+
+    
+
+    consultations = consultations.filter(
+        item => item.id !== id
+    );
+
+
+
+
+    if (!saveToStorage()) return;
+
+
+    displayConsultations();
+
+    updateDashboard();
+
+
+    showMessage(
+        "Consultation deleted successfully!",
+        "success"
+    );
+
+
+    if (editId === id) {
+
+        resetForm();
+
+    }
+
+}
+
+
+
+function updateDashboard() {
+
+
+
+
+    document.getElementById("totalCount").textContent =
+
+        consultations.length;
+
+
+    
+
+    document.getElementById("pendingCount").textContent =
+
+        consultations.filter(
+
+            item => item.status === "Pending"
+
+        ).length;
+
+
+    
+
+    document.getElementById("progressCount").textContent =
+
+        consultations.filter(
+
+            item => item.status === "In Progress"
+
+        ).length;
+
+
+ 
+
+    document.getElementById("completedCount").textContent =
+
+        consultations.filter(
+
+            item => item.status === "Completed"
+
+        ).length;
+
+}
+
+
+
+searchInput.addEventListener("input", function() {
+
+    displayConsultations();
+
+});
+
+
+
+
+filterStatus.addEventListener("change", function() {
+
+    displayConsultations();
+
+});
+
+
+
+document.getElementById("resetButton").addEventListener(
+
+    "click",
+
+    function() {
+
+        resetForm();
+
+        showMessage("Form cleared.", "success");
+
+    }
+
+);
+
+
+
+document.getElementById("exportButton").addEventListener(
+
+    "click",
+
+    function() {
+
+        if (consultations.length === 0) {
+
+            showMessage(
+                "No records available to export.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        
+
+        const headers = [
+
+            "Student",
+
+            "Course",
+
+            "Date",
+
+            "Category",
+
+            "Notes",
+
+            "Action Items",
+
+            "Follow-up",
+
+            "Status"
+
+        ];
+
+
+        // Format CSV cells safely
+
+        function csvCell(value) {
+
+            let text = String(value ?? "");
+
+            if (/^[\s]*[=+\-@]/.test(text)) {
+
+                text = "'" + text;
+
+            }
+
+            return '"' + text.replace(/"/g, '""') + '"';
+
+        }
+
+
+        
+
+        const rows = consultations.map(item => [
+
+            item.student,
+
+            item.course,
+
+            item.date,
+
+            item.category,
+
+            item.notes,
+
+            item.action,
+
+            item.followup,
+
+            item.status
+
+        ]);
+
+
+        
+
+        const csvContent = [
+
+            headers,
+
+            ...rows
+
+        ].map(row =>
+
+            row.map(csvCell).join(",")
+
+        ).join("\r\n");
+
+
+        
+
+        const blob = new Blob(
+
+            ["\uFEFF" + csvContent],
+
+            { type: "text/csv;charset=utf-8;" }
+
+        );
+
+
+        const url = URL.createObjectURL(blob);
+
+        const downloadLink = document.createElement("a");
+
+        downloadLink.href = url;
+
+        downloadLink.download = "Consultation_History.csv";
+
+
+        document.body.appendChild(downloadLink);
+
+        downloadLink.click();
+
+        downloadLink.remove();
+
+        URL.revokeObjectURL(url);
+
+
+        showMessage(
+            "CSV file exported successfully!",
+            "success"
+        );
+
+    }
+
+);
+
+
+
+displayConsultations();
+
+
+
+
+updateDashboard();
+
+
+</script>
+
+</body>
+</html>
